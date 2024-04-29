@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 const Main = (props) => {
   return (
     <div> 
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
         {props.child}
          </div>
   )

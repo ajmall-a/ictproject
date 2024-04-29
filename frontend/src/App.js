@@ -5,8 +5,9 @@ import Main from './components/Main';
 import Home from './components/Home';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
-import Admindash from './components/Admindash';
 import Mentordash from './components/Mentordash';
+import { AddMentorForm } from './components/AddMentorForm';
+import AdminDashboard from './components/AdminDashboard';
 
 
 
@@ -15,10 +16,12 @@ function App() {
     <div>
       <Routes>
       <Route path={'/'} element={<Login/>}/>
-      <Route path={'/home'} element={<Main child={<Home/>}/>}/>
-      <Route path={'/navbar'} element={<Main child={<Navbar/>}/>}/>
-      <Route path={'/admindash'} element={<Main child={<Admindash/>}/>}/>
-      <Route path={'/mentordash'} element={<Main child={<Mentordash/>}/>}/>
+      {/* <Route path={'/home'} element={<Main child={<Home/>}/>}/>
+      <Route path={'/navbar'} element={<Main child={<Navbar/>}/>}/> */}
+      <Route path={'/admindashboard'} element={<Main child={<AdminDashboard/>}/>}/>
+      <Route path={'/mentorform'} element={<Main child={<AddMentorForm/>}/>}/>
+      
+      {/* <Route path={'/mentordash'} element={<Main child={<Mentordash/>}/>}/> */}
      
       
       </Routes>
