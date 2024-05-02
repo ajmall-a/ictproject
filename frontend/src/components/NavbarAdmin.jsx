@@ -19,6 +19,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+
+
+const navbarStyle = {
+  background: 'linear-gradient(to right,  #000000,#00008B)'
+}
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -163,7 +168,7 @@ const NavbarAdmin = () => {
   return (
     <div>
    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'black'}}>
+      <AppBar position="static" sx={{ backgroundColor: 'black'}}   style={navbarStyle}>
         <Toolbar>
          
           <Typography

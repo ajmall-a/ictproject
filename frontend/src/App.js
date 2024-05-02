@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Mentordash from './components/Mentordash';
-import { AddMentorForm } from './components/AddMentorForm';
+import AddMentorForm  from './components/AddMentorForm';
 import AdminDashboard from './components/AdminDashboard';
 
 
@@ -19,7 +19,7 @@ function App() {
       {/* <Route path={'/home'} element={<Main child={<Home/>}/>}/>
       <Route path={'/navbar'} element={<Main child={<Navbar/>}/>}/> */}
       <Route path={'/admindashboard'} element={<Main child={<AdminDashboard/>}/>}/>
-      <Route path={'/mentorform'} element={<Main child={<AddMentorForm/>}/>}/>
+      <Route path={'/mentorform'} element={<AddMentorForm method="post" data={{name:'',email:'',phoneNumbe:'',password:'',projectTopics:['']}}/>}/>
       
       {/* <Route path={'/mentordash'} element={<Main child={<Mentordash/>}/>}/> */}
      

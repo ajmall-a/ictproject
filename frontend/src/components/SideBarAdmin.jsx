@@ -36,7 +36,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import { Button } from '@mui/material';
 
-
+const navbarStyle = {
+  background: 'linear-gradient(to right, #000000,#000080)'
+}
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -184,13 +186,13 @@ const SideBarAdmin = (props) => {
         
       <div>
         
-        <Toolbar />
-        <Divider />
-        <List style={{color:'white'}}>
+        <Toolbar  style={{backgroundColor:'#000000'}}/>
+        <Divider   />
+        <List style={{color:'black'}}>
           {['Dashboard', 'Messages', 'Trash', 'Settings'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon style={{color:'white'}}>
+                <ListItemIcon style={{color:'black'}}>
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                   {index === 0 && <DashboardIcon/>}
    {index === 1 && <MailIcon/>}
@@ -205,11 +207,11 @@ const SideBarAdmin = (props) => {
           ))}
         </List>
         <Divider />
-        <List style={{color:'white'}}>
+        <List style={{color:'black'}}>
           {['Add Project', 'Add mentor'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon style={{color:'white'}}>
+                <ListItemIcon style={{color:'black'}}>
                 {index === 0 && <TaskIcon />}
    {index === 1 && <PersonIcon />}
                   {/* {index % 2 === 0 ? <SettingsIcon/> : <MailIcon />} */}
@@ -244,6 +246,7 @@ const SideBarAdmin = (props) => {
  
       <CssBaseline />
       <AppBar
+      style={navbarStyle}
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -344,7 +347,7 @@ const SideBarAdmin = (props) => {
           sx={{
         
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { height: '100%' ,backgroundColor:'black', boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { height: '100%' ,backgroundColor:'white', boxSizing: 'border-box', width: drawerWidth },
           }}
           open
         >
