@@ -218,7 +218,7 @@ const SideBarAdmin = (props) => {
                 </ListItemIcon>
                 {/* <ListItemText primary={text} /> */}
                 {index === 0 && (
-            <Link to="/mentorform" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/projectform" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemText primary="Add Project" />
             </Link>
           )}
@@ -261,8 +261,8 @@ const SideBarAdmin = (props) => {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-       Dashboard
-          </Typography>
+       <Link to="/admindashboard"    style={{textDecoration:'none',color:'white'}}> Dashboard </Link> </Typography>
+         
          
          
           <Search >

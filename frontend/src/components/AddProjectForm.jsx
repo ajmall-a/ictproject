@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import SideBarAdmin from './SideBarAdmin';
 
-const AddMentorForm = (props) => {
+const AddProjectForm = (props) => {
 
   const navigate=useNavigate();
   
@@ -27,7 +27,7 @@ const AddMentorForm = (props) => {
     if(props.method==='post')
     {
       console.log('clicked',formdata)
-      axios.post('http://localhost:3005/api/mentorform',formdata)
+      axios.post('http://localhost:3005/api/projectform',formdata)
       
       .then((res)=>{
       alert( res.data.Message);
@@ -41,7 +41,7 @@ const AddMentorForm = (props) => {
 
       if(props.method==='put')
 {
-axios.put('http://localhost:3005/api/update/'+formdata._id,formdata).then((res)=>{
+axios.put('http://localhost:3005/api/updateproject/'+formdata._id,formdata).then((res)=>{
 alert(res.data.Message);
 console.log(res.data);
 navigate('/admindashboard');
@@ -68,80 +68,66 @@ window.location.reload(false);
    <>
    <SideBarAdmin/>
 
-    <div style={{margin:"10% 20% 20%  30%",backgroundColor:'lavender', padding:"50px",border:"1px solid black",width:"800px"}}>
+    <div style={{margin:"10% 20% 10%  30%",backgroundColor:'lavender', padding:"50px",border:"1px solid black",width:"800px"}}>
      <Box sx={{ flexGrow: 1 }}  >
       <Grid container spacing={2} >
        
         <Grid item xs={12}>
         
-        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Mentor Name:</label>
+        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Project Topic:</label>
         <TextField
          style={{width:"410px"}}
         
-          label="Enter Name"
+          label="Enter  project Name"
           type="text"
-          name='name'
-          value={formdata.name}
+          name='topic'
+          value={formdata.topic}
           onChange={inputHandler}
          
         />
         </Grid>
         <Grid item xs={12}>
-        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}}>Email:</label>
+        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}}>Description</label>
         <TextField
 
           style={{width:"410px"}}
         
-          label="Enter E-Mail"
-          type="email"
-          name='email'
-          value={formdata.email}
+          label="Enter Description"
+          type="text"
+          name='description'
+          value={formdata.description}
           onChange={inputHandler}
         
         />
         </Grid>
         <Grid item xs={12}>
-        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Phone number:</label>
+        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Image:</label>
         <TextField
         style={{width:"410px"}}
          
-          label="Enter Phone Number"
+          label="Enter image url"
           type="number"
-          name='phoneNumber'
-          value={formdata.phoneNumber}
+          name='image'
+          value={formdata.image}
           onChange={inputHandler}
         
         />
         </Grid>
         <Grid item xs={12}>
-        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Password:</label>
+        <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >mentor</label>
         <TextField
      style={{width:"410px"}}
          
-          label="Enter Password"
+          label="Enter mentor name"
         
-          name='password'
-          value={formdata.password}
+          name='mentor'
+          value={formdata.mentor}
           onChange={inputHandler}
           
         
         />
         </Grid>
-        <Grid item xs={12}>
-        <label style={{float: 'left',margin:'5px',fontSize:'22px',width:"600px"}} >Project topic allotted:</label>
-        <TextField
-       
-         
-         
-          label="Enter Project Name"
-          type="text"
-          fullWidth
-          name='projectTopics'
-          value={formdata.projectTopics}
-          onChange={inputHandler}
-        
-        />
-        </Grid>
+      
         <Grid item xs={12}>
         <button variant='contained' onClick={addData}
        style={{padding:'10px',backgroundColor:'#7b68ee',color:"white",width:'150px',marginTop:'50px',marginLeft:'300px'}}>Add Data</button>
@@ -155,4 +141,6 @@ window.location.reload(false);
 }
 
 
-export default AddMentorForm
+
+
+export default AddProjectForm

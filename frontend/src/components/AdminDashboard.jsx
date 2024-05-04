@@ -17,6 +17,7 @@ import { Style } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import AddMentorForm from './AddMentorForm';
 import axios from 'axios';
+import AddProjectForm from './AddProjectForm';
 
 
 
@@ -46,15 +47,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AdminDashboard = () => {
   const [dataset,setData]=useState([]);
+  const [dataset1,setData1]=useState([]);
 
 
   useEffect(()=>{
    axios.get('http://localhost:3005/api/admindashboard').then((res)=>{
      console.log(res);
-     setData(res.data);
+     setData1(res.data);
    })
    
    },[])
+
+  //  for project details
+   useEffect(()=>{
+    axios.get('http://localhost:3005/api/admin').then((res)=>{
+      console.log(res);
+      setData(res.data);
+    })
+    
+    },[])
 
   
    const deleteMen=(id)=>{
@@ -67,7 +78,18 @@ const AdminDashboard = () => {
             console.log(error);
           })
    }
-   //  update 
+  //  for project
+   const deleteProject=(id)=>{
+    axios.delete('http://localhost:3005/api/deleteproject/'+id).then((res)=>{
+      alert(res.data.Message);
+      console.log(res.data);
+      window.location.reload(false);
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+   }
+   //  update  mentor
   const[update,setUpdate]=useState(false);
   const [value,setValue]=useState([]);
 
@@ -77,7 +99,15 @@ const AdminDashboard = () => {
     setValue(data);
   }
   
+// update Project
+const[update1,setUpdate1]=useState(false);
+  const [value1,setValue1]=useState([]);
 
+  const updateProject=(data)=>{
+    console.log(data);
+    setUpdate1(true);
+    setValue1(data);
+  }
    
     // return(
     //   <div>
@@ -94,7 +124,7 @@ const AdminDashboard = () => {
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-          <StyledTableCell style={{color:'white',fontSize:'20px'}}>Project Topic</StyledTableCell>
+          <StyledTableCell style={{color:'black',fontSize:'20px'}}>Project Topic</StyledTableCell>
             
             <StyledTableCell style={{color:'black'}} align="right">.</StyledTableCell>
             <StyledTableCell style={{color:'black'}}  align="right">.</StyledTableCell>
@@ -108,13 +138,13 @@ const AdminDashboard = () => {
           {dataset.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.topic}
               </StyledTableCell>
               <StyledTableCell style={{color:'black'}} align="right"></StyledTableCell>
             <StyledTableCell style={{color:'black'}} align="right"></StyledTableCell>
 
-              <StyledTableCell>  <button style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>EDIT</button></StyledTableCell>
-              <StyledTableCell>  <button style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>DELETE</button></StyledTableCell>
+              <StyledTableCell>  <button onClick={()=>updateProject(row)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>EDIT</button></StyledTableCell>
+              <StyledTableCell>  <button onClick={()=>deleteProject(row._id)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>DELETE</button></StyledTableCell>
               
              
              
@@ -125,25 +155,30 @@ const AdminDashboard = () => {
     </TableContainer>
     {/* <div style={{textAlign:'center'}}><button style={{  margin:'5px', padding:'5px',fontSize:'14px',backgroundColor:'black',color:'white'} }>ADD PROJECT TOPIC</button> </div> */}
         </Grid>
+        </Grid>
+    </Box>
+    )
 
-    
 
+    let finalJSX1=(
+    <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2} style={{marginTop:'100px',marginLeft:'250px'}}>
         <Grid item xs={8}>
           <Typography variant="h5" gutterBottom style={{textAlign:'center'}}>Mentor Details</Typography>
         <TableContainer component={Paper} >
       <Table sx={{ minWidth: 300 }} aria-label="customized table">
         <TableHead >
           <TableRow >
-            <StyledTableCell style={{color:'white'}}>Name</StyledTableCell>
+            <StyledTableCell style={{color:'black'}}>Name</StyledTableCell>
             
-            <StyledTableCell style={{color:'white'}} align="right">Email</StyledTableCell>
-            <StyledTableCell style={{color:'white'}} align="right">Phone Number</StyledTableCell>
+            <StyledTableCell style={{color:'black'}} align="right">Email</StyledTableCell>
+            <StyledTableCell style={{color:'black'}} align="right">Phone Number</StyledTableCell>
             <StyledTableCell style={{color:'black'}} align="right">hi</StyledTableCell>
             <StyledTableCell style={{color:'black'}} align="right">hi</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {dataset.map((row) => (
+          {dataset1.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
@@ -171,10 +206,12 @@ const AdminDashboard = () => {
     </Box>
     )
     
-  
+    if(update1) finalJSX1=<AddProjectForm method='put'data={value1}/>   
  if(update) finalJSX=<AddMentorForm method='put'data={value}/> 
 
-     
+
+ 
+ 
   return (
     <div>
       <SideBarAdmin/>
@@ -182,6 +219,8 @@ const AdminDashboard = () => {
      <div >
    
    {finalJSX}
+   {finalJSX1}
+
 
     //  {/* <AdminFooter/> */}
     * <Typography variant="body2" color="black" style={{textAlign:'center',marginTop:'200px'}}>

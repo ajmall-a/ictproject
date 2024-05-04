@@ -8,6 +8,8 @@ const app=new express();
 app.use(morgan('dev'));
 
 const mentorRoute=require('./routes/mentorRoutes');
+const projectRoute=require('./routes/projectRoutes');
+const userRoute=require('./routes/userRoutes');
 
 const cors=require('cors');
 
@@ -18,6 +20,9 @@ const cors=require('cors');
 app.use(cors());
 
 app.use('/api',mentorRoute);
+app.use('/api',projectRoute);
+app.use('/api',userRoute);
+
 
 
 
