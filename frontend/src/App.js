@@ -7,9 +7,10 @@ import { Route, Routes } from 'react-router-dom';
 import SideBarAdmin from './components/SideBarAdmin';
 import AddMentorForm from './components/AddMentorForm';
 import AddProjectForm from './components/AddProjectForm';
-// import HomePage from './components/HomePage'
 import Login from './components/Login';
 import Mentordash from './components/Mentordash';
+import { Home } from '@mui/icons-material';
+import Home from './Pages/Home';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
 {/* <NavbarAdmin/> */}
 {/* <SideBarAdmin/>  */}
       <Routes>
-      {/* <Route path={'/'} element={<HomePage/>}/> */}
+      <Route path={'/Home'} element={<Home/>}/>
       <Route path={'/login'} element={<Login/>}/>
         <Route path={'/admindashboard'} element={<AdminDashboard/>}/>
         <Route path={'/mentordashboard'} element={<Mentordash/>}/>
