@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import SideBarAdmin from './SideBarAdmin'
+import SideBarAdmin from '../Admin/SideBarAdmin'
 import AdminFooter from '../components/AdminFooter'
 import { Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
@@ -126,7 +126,7 @@ const[update1,setUpdate1]=useState(false);
           <TableRow>
           <StyledTableCell style={{color:'white',fontSize:'15px'}}>Project Topic</StyledTableCell>
             
-            <StyledTableCell style={{color:'black'}} align="right">.</StyledTableCell>
+            <StyledTableCell style={{color:'white'}} align="left">Project Description</StyledTableCell>
             <StyledTableCell style={{color:'black'}}  align="right">.</StyledTableCell>
             <StyledTableCell style={{color:'black'}} align="right">.</StyledTableCell>
             <StyledTableCell style={{color:'black'}}  align="right">.</StyledTableCell>
@@ -136,12 +136,13 @@ const[update1,setUpdate1]=useState(false);
         </TableHead>
         <TableBody>
           {dataset.map((row) => (
-            <StyledTableRow key={row.name}>
+            // changed --key error
+            <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.topic}
               </StyledTableCell>
-              <StyledTableCell style={{color:'black'}} align="right"></StyledTableCell>
-            <StyledTableCell style={{color:'black'}} align="right"></StyledTableCell>
+              <StyledTableCell style={{color:'black'}} align="left">{row. description}</StyledTableCell>
+            <StyledTableCell style={{color:'black'}} align="left"></StyledTableCell>
 
               <StyledTableCell>  <button onClick={()=>updateProject(row)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>EDIT</button></StyledTableCell>
               <StyledTableCell>  <button onClick={()=>deleteProject(row._id)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>DELETE</button></StyledTableCell>
@@ -171,10 +172,10 @@ const[update1,setUpdate1]=useState(false);
           <TableRow >
             <StyledTableCell style={{color:'white'}}>Name</StyledTableCell>
             
-            <StyledTableCell style={{color:'white'}} align="right">Email</StyledTableCell>
-            <StyledTableCell style={{color:'white'}} align="right">Phone Number</StyledTableCell>
-            <StyledTableCell style={{color:'black'}} align="right">hi</StyledTableCell>
-            <StyledTableCell style={{color:'black'}} align="right">hi</StyledTableCell>
+            <StyledTableCell style={{color:'white'}} align="left">Email</StyledTableCell>
+            <StyledTableCell style={{color:'white'}} align="left">Phone Number</StyledTableCell>
+            <StyledTableCell style={{color:'black'}} align="left">hi</StyledTableCell>
+            <StyledTableCell style={{color:'black'}} align="left">hi</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -184,8 +185,8 @@ const[update1,setUpdate1]=useState(false);
                 {row.name}
               </StyledTableCell>
             
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
-              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="left">{row.email}</StyledTableCell>
+              <StyledTableCell align="left">{row.phoneNumber}</StyledTableCell>
               <StyledTableCell>  <button onClick={()=>updateMen(row)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>EDIT</button></StyledTableCell>
               <StyledTableCell>  <button onClick={()=>deleteMen(row._id)} style={{  margin:'5px', padding:'5px',fontSize:'12px',backgroundColor:'black',color:'white'} }>DELETE</button></StyledTableCell>
               </StyledTableRow>
@@ -235,7 +236,7 @@ const[update1,setUpdate1]=useState(false);
     </div>
     </div>
     )
-  //  );
+ 
 
    
    

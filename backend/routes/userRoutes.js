@@ -17,13 +17,12 @@ const createatoken=(name)=>{
 
 
 router.post('/login',async(req,res)=>{
-    let email= req.body.email;
+    let email= req.body.user;
     let password =req.body.password;
-            
-        
+   
 
-    const adm = await admin.findOne({email:email});
-    const men = await mentor.findOne({email:email});
+    const adm = await admin.findOne({ email: email});
+    const men = await mentor.findOne({ email: email});
 
     if(adm){
         try {

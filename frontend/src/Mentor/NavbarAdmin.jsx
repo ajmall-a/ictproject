@@ -18,12 +18,10 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 
 
-const navbarStyle = {
-  background: 'linear-gradient(to right,  #000000,#00008B)'
-}
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -128,27 +126,8 @@ const NavbarAdmin = () => {
       open={isMobileMenuOpen}
      
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-        
-      </MenuItem>
+     
+      
       
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -168,18 +147,18 @@ const NavbarAdmin = () => {
   return (
     <div>
    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'black'}}   style={navbarStyle}>
+      <AppBar position="static" sx={{ backgroundColor: 'black'}}  >
         <Toolbar>
-         
-          <Typography
+        <Typography
             variant="h6"
             noWrap
             component="div"
-         
+         style={{margin:"10px"}}
             sx={{ display: { xs: 'none', sm: 'block',color:"white" } }}
-          > <Link to="/admindashboard"    style={{textDecoration:'none',color:'white'}}> Dashboard </Link> </Typography>
+          > Mentor DashBoard</Typography>
       
          
+                 
          
          
           <Search>
@@ -191,31 +170,31 @@ const NavbarAdmin = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
+          <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              
+              color="inherit"
+            >
+              <LibraryBooksIcon />
+            </IconButton>
+          <Typography
+           
+            noWrap
+            component="div"
+         
+            sx={{ display: { xs: 'none', sm: 'block',color:"white",margin:"5px" } }}
+          > <Link to="/materialview"    style={{textDecoration:'none',color:'white'}}> Reference Materials </Link> </Typography>
+      
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge  color="error">
-                <SettingsIcon />
-              </Badge>
-            </IconButton>
+                    
+          
             
             <IconButton
               size="large"

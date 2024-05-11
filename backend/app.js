@@ -10,7 +10,8 @@ app.use(morgan('dev'));
 const mentorRoute=require('./routes/mentorRoutes');
 const projectRoute=require('./routes/projectRoutes');
 const userRoute=require('./routes/userRoutes');
-
+const studentRoute=require('./routes/studentRoutes');
+const referenceRoute=require('./routes/referencematerialRoutes');
 const cors=require('cors');
 
 
@@ -22,7 +23,8 @@ app.use(cors());
 app.use('/api',mentorRoute);
 app.use('/api',projectRoute);
 app.use('/api',userRoute);
-
+app.use('/api',studentRoute);
+app.use('/api',referenceRoute);
 
 
 

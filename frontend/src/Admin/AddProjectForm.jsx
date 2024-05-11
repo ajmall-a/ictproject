@@ -4,12 +4,13 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField } from '@mui/material';
-import NavbarAdmin from './NavbarAdmin';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios'
 import SideBarAdmin from './SideBarAdmin';
+import AdminFooter from '../components/AdminFooter';
 
 const AddProjectForm = (props) => {
 
@@ -68,7 +69,7 @@ window.location.reload(false);
    <>
    <SideBarAdmin/>
 
-    <div style={{margin:"10% 20% 10%  30%",backgroundColor:'lavender', padding:"50px",border:"1px solid black",width:"800px"}}>
+    <div style={{margin:"10% 20% 10%  30%",backgroundColor:'white', padding:"50px",border:"1px solid black",width:"800px"}}>
      <Box sx={{ flexGrow: 1 }}  >
       <Grid container spacing={2} >
        
@@ -78,7 +79,7 @@ window.location.reload(false);
         <TextField
          style={{width:"410px"}}
         
-          label="Enter  project Name"
+          label="Enter project Name"
           type="text"
           name='topic'
           value={formdata.topic}
@@ -105,15 +106,14 @@ window.location.reload(false);
         <TextField
         style={{width:"410px"}}
          
-          label="Enter image url"
-          type="number"
+          label="Enter image url"        
           name='image'
           value={formdata.image}
           onChange={inputHandler}
         
         />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
         <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >mentor</label>
         <TextField
      style={{width:"410px"}}
@@ -126,7 +126,7 @@ window.location.reload(false);
           
         
         />
-        </Grid>
+        </Grid> */}
       
         <Grid item xs={12}>
         <button variant='contained' onClick={addData}
@@ -135,6 +135,7 @@ window.location.reload(false);
       </Grid>
     </Box>
     </div>
+    <AdminFooter/> 
     </>
     
   )

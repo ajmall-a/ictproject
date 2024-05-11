@@ -4,17 +4,15 @@ const projectSchema=mongoose.Schema({
     description:String,
 image:String,
 mentor:String,
+Batch: String,
 submissions:[{
-    batch:String,
-    Team:[String],
-    comments:String,
-    marks:Number,
-    Status:{
-        type:String,
-        default:"Pending"
-    }
-
-    }]
+    
+    Name: String,
+    // Batch: String,
+    // Email: String,
+    // SubmissionLink: String,
+    EvaluationStatus: { type: String, enum: ['completed', 'pending'], default: 'pending' }}],
+  
 })
 const projectData=mongoose.model('project',projectSchema);
 

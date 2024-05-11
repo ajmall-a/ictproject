@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField } from '@mui/material';
-import NavbarAdmin from './NavbarAdmin';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios'
 import SideBarAdmin from './SideBarAdmin';
+import AdminFooter from '../components/AdminFooter';
 
 const AddMentorForm = (props) => {
 
@@ -33,6 +33,7 @@ const AddMentorForm = (props) => {
       alert( res.data.Message);
       console.log(res.data);
       navigate('/admindashboard');
+      window.location.reload(false);
       
       })
       .catch((error)=>{
@@ -68,12 +69,14 @@ window.location.reload(false);
    <>
    <SideBarAdmin/>
 
-    <div style={{margin:"10% 20% 20%  30%",backgroundColor:'lavender', padding:"50px",border:"1px solid black",width:"800px"}}>
+    <div style={{margin:"10% 20% 20%  30%",backgroundColor:'white', padding:"50px",border:"1px solid black",width:"800px"}}>
+   
+   
      <Box sx={{ flexGrow: 1 }}  >
       <Grid container spacing={2} >
        
         <Grid item xs={12}>
-        
+    
         <label style={{float: 'left',marginRight:'80px',fontSize:'22px',width:"200px"}} >Mentor Name:</label>
         <TextField
          style={{width:"410px"}}
@@ -105,8 +108,7 @@ window.location.reload(false);
         <TextField
         style={{width:"410px"}}
          
-          label="Enter Phone Number"
-          type="number"
+          label="Enter Phone Number"        
           name='phoneNumber'
           value={formdata.phoneNumber}
           onChange={inputHandler}
@@ -119,7 +121,7 @@ window.location.reload(false);
      style={{width:"410px"}}
          
           label="Enter Password"
-        
+        type='password'
           name='password'
           value={formdata.password}
           onChange={inputHandler}
@@ -142,13 +144,20 @@ window.location.reload(false);
         
         />
         </Grid>
-        <Grid item xs={12}>
-        <button variant='contained' onClick={addData}
-       style={{padding:'10px',backgroundColor:'#7b68ee',color:"white",width:'150px',marginTop:'50px',marginLeft:'300px'}}>Add Data</button>
         </Grid>
-      </Grid>
-    </Box>
+      
+      </Box>
+      
+        <button variant='contained' type="submit" onClick={addData}
+       style={{padding:'10px',backgroundColor:'#7b68ee',color:"white",width:'150px',marginTop:'50px',marginLeft:'300px'}}>Add Data</button>
+        
+       
+     
+       
+     
+   
     </div>
+    <AdminFooter/> 
     </>
     
   )

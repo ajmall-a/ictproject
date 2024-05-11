@@ -93,4 +93,53 @@ router.get('/mentoProjects/:mentor',(req,res)=>{
 })
 
 
+
+// To display all the submissions of the particular mentor
+
+router.get('/submissions/:mentor',async(req,res)=>{
+    const mentorName = req.params.mentor;
+    try {  
+     const projectDetails=await projectdetails.find({ mentor: mentorName }) ;
+     if(!projectDetails)
+        {
+        return res.status(404).json({ message: 'Project not found' });}
+      res.json(projectDetails);
+    } catch (err) {
+        console.error('Error fetching submissions:', err);
+      res.status(500).json({ message: err.message });
+    }
+  });
+
+// delete Student submission based on ID
+
+
+
+router.put('/updateSub', async (req, res) => {
+    const pid = req.body.pid;
+    const sid = req.body.sid;
+
+    try {
+        console.log(pid, sid);
+
+     
+        const updatedProject = await projectdetails.findOneAndUpdate(
+            { _id: pid },
+            { $pull: { 'submissions': { ID: sid } } },
+            { new: true } 
+        );
+
+     
+        if (!updatedProject) {
+            return res.status(404).json({ error: 'No project found' });
+        }
+
+        res.status(200).json({ message: 'Submission deleted successfully', updatedProject });
+    } catch (error) {
+        console.error('Error deleting submission:', error);
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+
 module.exports=router;

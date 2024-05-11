@@ -188,24 +188,7 @@ const SideBarAdmin = (props) => {
         
         <Toolbar  style={{backgroundColor:'#000000'}}/>
         <Divider   />
-        <List style={{color:'black'}}>
-          {['Dashboard', 'Messages', 'Trash', 'Settings'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon style={{color:'black'}}>
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  {index === 0 && <DashboardIcon/>}
-   {index === 1 && <MailIcon/>}
-   {index === 2 && <RestoreFromTrashIcon/>}
-   {index === 3 && <SettingsIcon/> }
-                  
-                </ListItemIcon>
-                <ListItemText primary={text} />
-                
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+       
         <Divider />
         <List style={{color:'black'}}>
           {['Add Project', 'Add mentor'].map((text, index) => (
@@ -277,7 +260,7 @@ const SideBarAdmin = (props) => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails"color="inherit" >
+            {/* <IconButton size="large" aria-label="show 4 new mails"color="inherit" >
               <Badge badgeContent={4} color="error" >
                 <MailIcon />
               </Badge>
@@ -300,7 +283,7 @@ const SideBarAdmin = (props) => {
                 <SettingsIcon />
               </Badge>
             </IconButton>
-            
+             */}
             <IconButton
               size="large"
               edge="end"
