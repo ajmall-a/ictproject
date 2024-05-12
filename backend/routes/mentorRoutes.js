@@ -1,13 +1,14 @@
 const express=require('express');
 const router=express.Router();
 const mentordetails=require('../model/mentor');
+const authUser = require('../middleware/authUser');
 
 
 
 router.use(express.json());
 // for creting new mentor
 
-router.post('/mentorform',async(req,res)=>{
+router.post('/mentorform',authUser,async(req,res)=>{
 
     try {
        const data=req.body;
@@ -28,7 +29,7 @@ router.post('/mentorform',async(req,res)=>{
 
 // Display mentor details in Admin Dashboard page
 
-router.get('/admindashboard',(req,res)=>{
+router.get('/admindashboard',authUser,(req,res)=>{
 
     try {
         mentordetails.find().then((mdetails)=>{
@@ -39,7 +40,7 @@ router.get('/admindashboard',(req,res)=>{
     }
 })
 
-router.delete('/delete/:id',async(req,res)=>{
+router.delete('/delete/:id',authUser,async(req,res)=>{
 
     try {
     let id=req.params.id;
@@ -60,7 +61,7 @@ router.delete('/delete/:id',async(req,res)=>{
     
     
     
-    router.put('/update/:id',async(req,res)=>{
+    router.put('/update/:id',authUser,async(req,res)=>{
         try {
             let id=req.params.id;
             const updatedmentor= await  mentordetails.findByIdAndUpdate(id, req.body);

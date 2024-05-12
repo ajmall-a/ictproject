@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const ReferenceMaterial = require('../model/referencematerial');
+const authUser = require('../middleware/authUser');
 
 // Add new reference material
-router.post('/addreference-material', async (req, res) => {
+router.post('/addreference-material',authUser, async (req, res) => {
   try {
     const { title, description, link } = req.body;
     const newReferenceMaterial = await ReferenceMaterial.create({ title, description, link });
@@ -15,7 +16,7 @@ router.post('/addreference-material', async (req, res) => {
 });
 
 // Get all reference materials
-router.get('/reference-material', async (req, res) => {
+router.get('/reference-material',authUser, async (req, res) => {
   try {
     const referenceMaterials = await ReferenceMaterial.find();
     res.status(200).json(referenceMaterials);
@@ -29,7 +30,7 @@ router.get('/reference-material', async (req, res) => {
 
 
 
-router.delete('/reference-material/:id',async(req,res)=>{
+router.delete('/reference-material/:id',authUser,async(req,res)=>{
 
   try {
   let id=req.params.id;

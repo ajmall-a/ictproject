@@ -7,8 +7,8 @@ router.use(express.json());
 
 const createatoken=(name)=>{
  // send the tokento the frontend
-             let payload={name:name};
-        return jwt.sign(payload,'ictapp');
+        let payload={name:name};
+        return jwt.sign(payload,process.env.SECRET_CODE);
 }
 
 
@@ -19,16 +19,20 @@ const createatoken=(name)=>{
 router.post('/login',async(req,res)=>{
     let email= req.body.user;
     let password =req.body.password;
+    console.log(email,password);
    
 
     const adm = await admin.findOne({ email: email});
+    console.log(adm)
     const men = await mentor.findOne({ email: email});
+    console.log(men)
 
     if(adm){
         try {
             if(adm.password== password) {
                 let role='admin';
             const token=createatoken(adm.name)
+           
              res.send({message:'admin login successful',token,role});
             
              // res.json({message:"login successful",user})
@@ -47,6 +51,7 @@ router.post('/login',async(req,res)=>{
                     let role='mentor';
                     let name=men.name;
                     const token=createatoken(men.name)
+                   
                     res.send({message:'mentor login successful',role,token,name});
                     // res.status(200).json({role,token,name});
                  

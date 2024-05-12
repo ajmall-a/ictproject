@@ -1,15 +1,14 @@
 const express=require('express');
 const router=express.Router();
 const studentDetails=require('../model/student');
-
-
+const authUser=require('../middleware/authUser.js')
 
 router.use(express.json());
 
 
 
 
-router.get('/studentdetails/:student',async(req,res)=>{
+router.get('/studentdetails/:student',authUser,async(req,res)=>{
 
     const StudentName = req.params.student;
     try {  
@@ -28,7 +27,7 @@ router.get('/studentdetails/:student',async(req,res)=>{
     
     
     
-    router.put('/students/:id',async(req,res)=>{
+    router.put('/students/:id',authUser,async(req,res)=>{
         try {
             let id=req.params.id;
             
