@@ -18,6 +18,7 @@ import MentorDash from './Mentor/MentorDash';
 import SubmissionList from './Mentor/SubmissionList';
 import SubmissionsPage from './Mentor/SubmissionsPage';
 import ReferenceMaterial from './Mentor/ReferenceMaterial';
+import PrivateRoutes from './PrivateRoutes';
  
 
 
@@ -36,16 +37,16 @@ function App() {
         <Route path='/courses' element={<Courses/>} />
         <Route path='/carrers' element={<Carrers />} />
         <Route path='/contact' element={<Contact/>} />
+        <Route element= {<PrivateRoutes />}>
         <Route path="/submissionlist/:mentorname"element={<SubmissionList/>}/>
         <Route path={'/admindashboard'} element={<AdminDashboard/>}/>      
         <Route path={'/projectform'} element={<AddProjectForm method="post" data={{topic:'',description:'',image:'',mentor:''}}/>}/>
         <Route path={'/mentorform'} element={<AddMentorForm method="post" data={{name:'',email:'',phoneNumbe:'',password:'',projectTopics:['']}}/>}/>
-
         <Route path="/mentordashboard/:mentorname" element={<MentorDash/>} />
         <Route path="/submissionlist/:mentorname"element={<SubmissionList/>}/>
         <Route path="/viewsubmissions/:name" element={<SubmissionsPage/>}/>
         <Route path="/materialview" element={<ReferenceMaterial/>}/>
-   
+        </Route>
       </Routes>
    
     </div>

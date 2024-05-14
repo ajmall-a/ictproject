@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import SideBarAdmin from './SideBarAdmin';
 import AdminFooter from '../components/AdminFooter';
+import axiosInstance from '../axiosinstance';
 
 const AddProjectForm = (props) => {
 
@@ -28,7 +29,7 @@ const AddProjectForm = (props) => {
     if(props.method==='post')
     {
       console.log('clicked',formdata)
-      axios.post('http://localhost:3005/api/projectform',formdata)
+      axiosInstance.post('http://localhost:3005/api/projectform',formdata)
       
       .then((res)=>{
       alert( res.data.Message);
@@ -42,7 +43,7 @@ const AddProjectForm = (props) => {
 
       if(props.method==='put')
 {
-axios.put('http://localhost:3005/api/updateproject/'+formdata._id,formdata).then((res)=>{
+axiosInstance.put('http://localhost:3005/api/updateproject/'+formdata._id,formdata).then((res)=>{
 alert(res.data.Message);
 console.log(res.data);
 navigate('/admindashboard');

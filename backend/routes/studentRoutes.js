@@ -2,13 +2,25 @@ const express=require('express');
 const router=express.Router();
 const studentDetails=require('../model/student');
 const authUser=require('../middleware/authUser.js')
+const jwt = require('jsonwebtoken')
 
+function verifytoken(req,res,next){
+    const token = req.headers.token;
+    try {
+        if(!token) throw 'unauthorized access';
+        let payload = jwt.verify(token,'ictapp');
+        if(!payload)throw 'unauthorized access';
+        next()
+    } catch (error) {
+      res.status(401).send('caught in error')
+    }
+    }
 router.use(express.json());
 
 
 
 
-router.get('/studentdetails/:student',authUser,async(req,res)=>{
+router.get('/studentdetails/:student',verifytoken,async(req,res)=>{
 
     const StudentName = req.params.student;
     try {  
@@ -27,7 +39,7 @@ router.get('/studentdetails/:student',authUser,async(req,res)=>{
     
     
     
-    router.put('/students/:id',authUser,async(req,res)=>{
+    router.put('/students/:id',verifytoken,async(req,res)=>{
         try {
             let id=req.params.id;
             

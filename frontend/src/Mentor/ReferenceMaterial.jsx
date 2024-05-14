@@ -6,7 +6,7 @@ import AddMaterial from './AddMaterial';
 import axios from 'axios';
 import NavbarAdmin from './NavbarAdmin';
 import AdminFooter from '../components/AdminFooter';
-
+import axiosInstance from '../axiosinstance'
 
 const ReferenceMaterial = () => {
   const [materials, setMaterials] = useState([]);
@@ -16,7 +16,7 @@ const ReferenceMaterial = () => {
   }, []);
 
   const fetchMaterials = () => {
-    axios.get('http://localhost:3005/api/reference-material')
+    axiosInstance.get('http://localhost:3005/api/reference-material')
       .then((res) => {
         setMaterials(res.data);
       })
@@ -26,7 +26,7 @@ const ReferenceMaterial = () => {
   };
 
   const deleteMaterial = (id) => {
-    axios.delete('http://localhost:3005/api/reference-material/'+id)
+    axiosInstance.delete('http://localhost:3005/api/reference-material/'+id)
       .then(() => {
         alert('Reference material deleted successfully');
         fetchMaterials();

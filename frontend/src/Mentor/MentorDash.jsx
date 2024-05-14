@@ -6,6 +6,7 @@ import { Card, CardContent, Button, Typography, CardMedia, Grid } from '@mui/mat
 import { Link } from "react-router-dom";
 import NavbarAdmin from './NavbarAdmin';
 import AdminFooter from '../components/AdminFooter';
+import axiosInstance from '../axiosinstance';
 
 const MentorDash = () => {
     const [project, setProject] = useState([]);
@@ -16,7 +17,7 @@ const MentorDash = () => {
     useEffect(() => {
         
         
-         axios.get(`http://localhost:3005/api/mentoProjects/${mentorname}`)
+         axiosInstance.get(`http://localhost:3005/api/mentoProjects/${mentorname}`)
        
             .then(response => {
                 setProject(response.data);

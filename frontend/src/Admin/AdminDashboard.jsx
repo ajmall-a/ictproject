@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import AddMentorForm from './AddMentorForm';
 import axios from 'axios';
 import AddProjectForm from './AddProjectForm';
+import axiosInstance from '../axiosinstance';
 
 
 
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
 
 
   useEffect(()=>{
-   axios.get('http://localhost:3005/api/admindashboard').then((res)=>{
+   axiosInstance.get('http://localhost:3005/api/admindashboard').then((res)=>{
      console.log(res);
      setData1(res.data);
    })
@@ -60,7 +61,7 @@ const AdminDashboard = () => {
 
   //  for project details
    useEffect(()=>{
-    axios.get('http://localhost:3005/api/admin').then((res)=>{
+    axiosInstance.get('http://localhost:3005/api/admin').then((res)=>{
       console.log(res);
       setData(res.data);
     })
@@ -69,7 +70,7 @@ const AdminDashboard = () => {
 
   
    const deleteMen=(id)=>{
-    axios.delete('http://localhost:3005/api/delete/'+id).then((res)=>{
+    axiosInstance.delete('http://localhost:3005/api/delete/'+id).then((res)=>{
       alert(res.data.Message);
       console.log(res.data);
       window.location.reload(false);
@@ -80,7 +81,7 @@ const AdminDashboard = () => {
    }
   //  for project
    const deleteProject=(id)=>{
-    axios.delete('http://localhost:3005/api/deleteproject/'+id).then((res)=>{
+    axiosInstance.delete('http://localhost:3005/api/deleteproject/'+id).then((res)=>{
       alert(res.data.Message);
       console.log(res.data);
       window.location.reload(false);

@@ -14,10 +14,6 @@ const studentRoute=require('./routes/studentRoutes');
 const referenceRoute=require('./routes/referencematerialRoutes');
 const cors=require('cors');
 
-
-
-
-
 app.use(cors());
 
 app.use('/api',mentorRoute);

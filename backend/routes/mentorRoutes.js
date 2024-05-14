@@ -2,13 +2,25 @@ const express=require('express');
 const router=express.Router();
 const mentordetails=require('../model/mentor');
 const authUser = require('../middleware/authUser');
+const jwt = require('jsonwebtoken')
 
+function verifytoken(req,res,next){
+    const token = req.headers.token;
+    try {
+        if(!token) throw 'unauthorized access';
+        let payload = jwt.verify(token,'ictapp');
+        if(!payload)throw 'unauthorized access';
+        next()
+    } catch (error) {
+      res.status(401).send('caught in error')
+    }
+    }
 
 
 router.use(express.json());
 // for creting new mentor
 
-router.post('/mentorform',authUser,async(req,res)=>{
+router.post('/mentorform',verifytoken,async(req,res)=>{
 
     try {
        const data=req.body;
@@ -29,18 +41,18 @@ router.post('/mentorform',authUser,async(req,res)=>{
 
 // Display mentor details in Admin Dashboard page
 
-router.get('/admindashboard',authUser,(req,res)=>{
-
+router.get('/admindashboard',verifytoken, async (req, res) => {
     try {
-        mentordetails.find().then((mdetails)=>{
-            res.status(200).send(mdetails);
-        })
+        const mdetails = await mentordetails.find();
+        res.status(200).send(mdetails);
     } catch (error) {
-       res.status(404).send({Message:"can not display mentor details"}) 
+        console.error(error);
+        res.status(500).send({ Message: "Internal server error" });
     }
-})
+});
 
-router.delete('/delete/:id',authUser,async(req,res)=>{
+
+router.delete('/delete/:id',verifytoken,async(req,res)=>{
 
     try {
     let id=req.params.id;
@@ -61,7 +73,7 @@ router.delete('/delete/:id',authUser,async(req,res)=>{
     
     
     
-    router.put('/update/:id',authUser,async(req,res)=>{
+    router.put('/update/:id',verifytoken,async(req,res)=>{
         try {
             let id=req.params.id;
             const updatedmentor= await  mentordetails.findByIdAndUpdate(id, req.body);

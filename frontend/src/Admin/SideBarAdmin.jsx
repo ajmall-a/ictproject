@@ -104,6 +104,10 @@ const SideBarAdmin = (props) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const tokenrelease = () => {
+    sessionStorage.removeItem('userToken');
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -122,7 +126,7 @@ const SideBarAdmin = (props) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem ><Link to={'/'} style={{color:'black',textDecoration:'none'}}>Logout</Link></MenuItem>
+      <MenuItem onClick={tokenrelease}><Link to={'/'} style={{color:'black',textDecoration:'none'}}>Logout</Link></MenuItem>
     </Menu>
   );
 

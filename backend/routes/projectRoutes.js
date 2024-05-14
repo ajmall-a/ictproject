@@ -2,13 +2,24 @@ const express=require('express');
 const router=express.Router();
 const projectdetails=require('../model/project');
 const authUser = require('../middleware/authUser.js');
+const jwt = require('jsonwebtoken')
 
-
+function verifytoken(req,res,next){
+    const token = req.headers.token;
+    try {
+        if(!token) throw 'unauthorized access';
+        let payload = jwt.verify(token,'ictapp');
+        if(!payload)throw 'unauthorized access';
+        next()
+    } catch (error) {
+      res.status(401).send('caught in error')
+    }
+    }
 
 router.use(express.json());
 // for creting new mentor
 
-router.post('/projectform',authUser,async(req,res)=>{
+router.post('/projectform',verifytoken,async(req,res)=>{
 
     try {
        const data=req.body;
@@ -29,7 +40,7 @@ router.post('/projectform',authUser,async(req,res)=>{
 
 // Display mentor details in Admin Dashboard page
 
-router.get('/admin',authUser,(req,res)=>{
+router.get('/admin', verifytoken,(req,res)=>{
 
     try {
         projectdetails.find().then((pdetails)=>{
@@ -40,7 +51,7 @@ router.get('/admin',authUser,(req,res)=>{
     }
 })
 
-router.delete('/deleteproject/:id',authUser,async(req,res)=>{
+router.delete('/deleteproject/:id',verifytoken,async(req,res)=>{
 
     try {
     let id=req.params.id;
@@ -61,7 +72,7 @@ router.delete('/deleteproject/:id',authUser,async(req,res)=>{
     
     
     
-    router.put('/updateproject/:id',authUser,async(req,res)=>{
+    router.put('/updateproject/:id',verifytoken,async(req,res)=>{
         try {
             let id=req.params.id;
             const updateproject= await  projectdetails.findByIdAndUpdate(id, req.body);
@@ -81,7 +92,7 @@ router.delete('/deleteproject/:id',authUser,async(req,res)=>{
 
     // mentor dashboard
     
-router.get('/mentoProjects/:mentor',authUser,async(req,res)=>{
+router.get('/mentoProjects/:mentor', verifytoken, async(req,res)=>{
     const mentorName = req.params.mentor;
     try {
         projectdetails.find({ mentor: mentorName })
@@ -97,7 +108,7 @@ router.get('/mentoProjects/:mentor',authUser,async(req,res)=>{
 
 // To display all the submissions of the particular mentor
 
-router.get('/submissions/:mentor',authUser,async(req,res)=>{
+router.get('/submissions/:mentor',verifytoken,async(req,res)=>{
     const mentorName = req.params.mentor;
     try {  
      const projectDetails=await projectdetails.find({ mentor: mentorName }) ;
@@ -115,7 +126,7 @@ router.get('/submissions/:mentor',authUser,async(req,res)=>{
 
 
 
-router.put('/updateSub',authUser, async (req, res) => {
+router.put('/updateSub',verifytoken, async (req, res) => {
     const pid = req.body.pid;
     const sid = req.body.sid;
 

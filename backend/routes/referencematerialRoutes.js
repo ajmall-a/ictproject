@@ -2,9 +2,21 @@ const express = require('express');
 const router = express.Router();
 const ReferenceMaterial = require('../model/referencematerial');
 const authUser = require('../middleware/authUser');
+const jwt = require('jsonwebtoken')
 
+function verifytoken(req,res,next){
+    const token = req.headers.token;
+    try {
+        if(!token) throw 'unauthorized access';
+        let payload = jwt.verify(token,'ictapp');
+        if(!payload)throw 'unauthorized access';
+        next()
+    } catch (error) {
+      res.status(401).send('caught in error')
+    }
+    }
 // Add new reference material
-router.post('/addreference-material',authUser, async (req, res) => {
+router.post('/addreference-material',verifytoken, async (req, res) => {
   try {
     const { title, description, link } = req.body;
     const newReferenceMaterial = await ReferenceMaterial.create({ title, description, link });
@@ -16,7 +28,7 @@ router.post('/addreference-material',authUser, async (req, res) => {
 });
 
 // Get all reference materials
-router.get('/reference-material',authUser, async (req, res) => {
+router.get('/reference-material',verifytoken, async (req, res) => {
   try {
     const referenceMaterials = await ReferenceMaterial.find();
     res.status(200).json(referenceMaterials);
@@ -30,7 +42,7 @@ router.get('/reference-material',authUser, async (req, res) => {
 
 
 
-router.delete('/reference-material/:id',authUser,async(req,res)=>{
+router.delete('/reference-material/:id',verifytoken,async(req,res)=>{
 
   try {
   let id=req.params.id;

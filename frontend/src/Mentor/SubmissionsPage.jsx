@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 import { TextField } from "@mui/material";
 import NavbarAdmin from "./NavbarAdmin";
 import AdminFooter from "../components/AdminFooter";
+import axiosInstance from '../axiosinstance'
 
 const SubmissionsPage = () => {
   const { name } = useParams();
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/studentdetails/${name}`)
+    axiosInstance.get(`http://localhost:3005/api/studentdetails/${name}`)
       .then((res) => {
         setStudents(res.data);
       })
@@ -30,7 +31,7 @@ const SubmissionsPage = () => {
 
       setStudents(updatedStudents);
 
-      await axios.put(`http://localhost:3005/api/students/${id}`, { EvaluationStatus: evaluationStatus });
+      await axiosInstance.put(`http://localhost:3005/api/students/${id}`, { EvaluationStatus: evaluationStatus });
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +48,7 @@ const SubmissionsPage = () => {
 
       setStudents(updatedStudents);
 
-      await axios.put(`http://localhost:3005/api/students/${id}`, { marks: marks });
+      await axiosInstance.put(`http://localhost:3005/api/students/${id}`, { marks: marks });
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +65,7 @@ const SubmissionsPage = () => {
 
       setStudents(updatedStudents);
 
-      await axios.put(`http://localhost:3005/api/students/${id}`, { comments: comments });
+      await axiosInstance.put(`http://localhost:3005/api/students/${id}`, { comments: comments });
     } catch (error) {
       console.log(error);
     }

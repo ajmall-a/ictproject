@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField } from '@mui/material';
 // import axiosInstance from '../axiosInterceptor';
 import axios from 'axios';
+import axiosInstance from '../axiosinstance'
 
 const AddMaterial = ({ addMaterial }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ const AddMaterial = ({ addMaterial }) => {
   };
 
   const handleSubmit = () => {
-    axios.post('http://localhost:3005/api/addreference-material', { title, description, link })
+    axiosInstance.post('http://localhost:3005/api/addreference-material', { title, description, link })
       .then((res) => {
         addMaterial(res.data);
         setOpen(false);

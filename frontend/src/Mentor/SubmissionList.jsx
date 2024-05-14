@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import AdminFooter from "../components/AdminFooter";
 import NavbarAdmin from "./NavbarAdmin";
+import axiosInstance from '../axiosinstance'
 
 const SubmissionList = () => {
 
@@ -30,7 +31,7 @@ const SubmissionList = () => {
 
   
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/submissions/${mentorname}`).then((res) => {
+    axiosInstance.get(`http://localhost:3005/api/submissions/${mentorname}`).then((res) => {
       setSubmission(res.data);    
       setFilteredSub(res.data);
     }).catch((error) => {
@@ -81,7 +82,7 @@ navigate(`/viewsubmissions/${name}`);
 // delete Submission
 
 const deleteSubmission=(pid,sid)=>{
-  axios.put('http://localhost:3005/api/updateSub',{pid,sid}).then((res)=>{
+  axiosInstance.put('http://localhost:3005/api/updateSub',{pid,sid}).then((res)=>{
     alert(res.data.message);
     console.log(res.data);
     window.location.reload(false);
